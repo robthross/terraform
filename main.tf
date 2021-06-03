@@ -22,3 +22,7 @@ resource "azurerm_resource_group" "rtech" {
   location    = "westus"
 }
 
+resource "azurerm_network" "vnet01" {
+  name        = "rtech-vnet"
+  location    = "rg.location"
+}
