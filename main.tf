@@ -1,3 +1,9 @@
+variable "web_server_location1" {}
+variable "web_server_location2" {}
+variable "web_server_rtech1" {}
+variable "web_server_rtech2" {}
+
+
 # Configure the Azure provider
 terraform {
   required_providers {
@@ -13,16 +19,12 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "myTerraform"
-  location = "eastus"
+  name     = "${var.web_server_rtech1}"
+  location = "${var.web_server_location1}"
 }
 
 resource "azurerm_resource_group" "rtech" {
-  name        = "rtech-rg"
-  location    = "westus"
+  name        = "${var.web_server_rtech2}"
+  location    = "${var.web_server_location2}"
 }
 
-resource "azurerm_network" "vnet01" {
-  name        = "rtech-vnet"
-  location    = "rg.location"
-}
