@@ -5,15 +5,15 @@ variable "web_server_rtech2" {}
 variable "web_server_prefix" {}
 variable "web_server_address_space1" {}
 variable "web_server_address_space2" {}
-
-
+variable "web_server_address_subnet1" {}
+variable "web_server_address_subnet2" {}
 
 # Configure the Azure provider
 terraform {
   required_providers {
     azurerm = {
       source = "hashicorp/azurerm"
-      version = "2.61.0"
+      version = "2.62.1"
     }
   }
 }
@@ -44,4 +44,18 @@ resource "azurerm_virtual_network" "web_server_vnet2" {
   location              = var.web_server_location2
   resource_group_name   = azurerm_resource_group.rtech2.name
   address_space         = [var.web_server_address_space2]
+}
+
+resource "azurern_subnet" "web_server_subnet1" {
+  name                  = var.web_server_prefix
+  resource_group_name   = azurerm_resource_group.rtech1
+  virtual_network_name  = azurerm_virtual_network.name
+  address_prefix        = var.web_server_address_subnet1
+}
+
+resource "azurern_subnet" "web_server_subnet2" {
+  name                  = var.web_server_prefix
+  resource_group_name   = azurerm_resource_group.rtech2
+  virtual_network_name  = azurerm_virtual_network.name
+  address_prefix        = var.web_server_address_subnet2
 }
